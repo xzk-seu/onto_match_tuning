@@ -229,7 +229,17 @@ then the matching result evaluation function
 $$ E (\mathcal {M}, \mathcal {M}_r) = S $$
 can be used to calculate the score of the matching system, $ S \in [0,1] $. A higher $S$ indicates that $ A $ is closer to $ A_r $.
 
-%{\bf Definition 2} (Ontology Matching Tuning). {\it is to automatically select the optimal parameters and strategies for the ontology matching system for different ontology matching tasks to obtain better matching results.}
+
+
+\begin{figure}
+	\centering
+		\includegraphics[width=0.75\textwidth]{figures/onto_matching_ex.pdf}
+	\caption{Two simple ontologies and their matches}
+	\label{fig:onto_matching_ex}
+\end{figure}
+
+
+
 {\bf Definition 2} (Ontology Matching Tuning).
 {\it
 Ontology matching tuning is to automatically select the optimal parameters or strategies for the ontology matching system for different ontology matching tasks to obtain better matching results.
@@ -260,64 +270,79 @@ Finally, this approach reduces the amount of calculation required to search the 
 This section will introduce the construction method of historical record database and the similarity analysis method of ontology, then explain how to combine them into an ontology matching tuning method based on similarity analysis, and give details of the fast-tuning method based on predictive analysis.
 
 
-\subsection{Construction Approach of Historical Record Database}
 
-From the previous problem analysis, we know that $\mathcal{T}=\left\{\left(T, A_{r}\right)\right\}$, which is the set of all ontology matching tasks T and their corresponding reference matches $A_{r}$ that have been matched in history and have known reference matches.
-For the ontology matching system M, using the particle swarm optimization tuning method (ie $M T\left(T, M, A_{r}\right)=\vec{P} \in \mathcal{P}$), the history database $\mathcal{K}$ can be constructed as follows, so that it contains contains each ontology matching task and its corresponding optimal parameter value vector:
+
+\subsection{Construction of Historical Record Database}
+
+%Given $\mathcal{T}=\left\{\left(T, A_{r}\right)\right\}$, which is the set of all ontology matching tasks $T$ and their corresponding reference matches $A_{r}$ that have been matched in history and have known reference matches.
+%For the ontology matching system $M$, using the particle swarm optimization tuning method, i.e. $M T\left(T, M, A_{r}\right)=\vec{P} \in \mathcal{P}$, the historical record database $\mathcal{K}$ can be constructed as follows, so that it contains each ontology matching task and its corresponding optimal parameter value vector:
+For the ontology matching system $M$, using the particle swarm optimization tuning method, i.e. $M T\left(T, M, A_{r}\right)=\vec{P} \in \mathcal{P}$, the historical record database $\mathcal{K}$ that contains each ontology matching task and its corresponding optimal parameter value vector can be constructed as follows:
 $$
-\mathcal{K}=\left\{\left(T, M T\left(T, M, A_{r}\right)\right) |\left(T, A_{r}\right) \in \mathcal{T}\right\} \eqno{(4.1)}
+\mathcal{K}=\left\{\left(T, M T\left(T, M, A_{r}\right)\right) |\left(T, A_{r}\right) \in \mathcal{T}\right\}
 $$
+where $\mathcal{T}=\left\{\left(T, A_{r}\right)\right\}$, which is the set of all ontology matching tasks $T$ and their corresponding reference matches $A_{r}$ that have been matched in history and have known reference matches.
 
 Assuming that there are only historical matching tasks ${T_{1}}$ and ${T_{2}}$,
-and their corresponding reference matches are known as ${A_{r 1}}$ and ${A_{r 2}}$, then we have $\mathcal{T}=\left\{\left(T_{1}, A_{r 1}\right),\left(T_{2}, A_{r 2}\right)\right\}$.
+and their corresponding reference matches are known as ${A_{r 1}}$ and ${A_{r 2}}$,
+then we have $\mathcal{T}=\left\{\left(T_{1}, A_{r 1}\right),\left(T_{2}, A_{r 2}\right)\right\}$.
+Let $M T\left(T_{1}, M, A_{r 1}\right)=\vec{P}_{1}$ and $M T\left(T_{2}, M, A_{r 2}\right)=\vec{P}_{2}$,
+then we have $\mathcal{K}=\left\{\left(T_{1}, \vec{P}_{1}\right),\left(T_{2}, \vec{P}_{2}\right)\right\}$.
+%It can be seen that the optimal parameter value vector corresponding to each history matching task is recorded in $\mathcal{K}$.
 
-Let $M T\left(T_{1}, M, A_{r 1}\right)=\vec{P}_{1}$ and $M T\left(T_{2}, M, A_{r 2}\right)=\vec{P}_{2}$,then we have $\mathcal{K}=\left\{\left(T_{1}, \vec{P}_{1}\right),\left(T_{2}, \vec{P}_{2}\right)\right\}$.
-It can be seen that the optimal parameter value vector corresponding to each history matching task is recorded in $\mathcal{K}$.
+\subsection{Ontology Similarity Analysis}
 
-\subsection{Analysis Approach of Ontology Similarity}
+Based on the method proposed by Maedche et al.\cite{wwy51}, this paper analyzes the similarity between any two ontologies from three aspects: text similarity, conceptual level similarity, and conceptual relationship similarity.
+%the similarity between any two ontologies is analyzed from three angles: text similarity, conceptual level similarity and conceptual relationship similarity.
 
-Based on the method proposed by Maedche et al. \cite{wwy51}, the similarity between any two ontology is analyzed from three angles: text similarity, conceptual level similarity and conceptual relationship similarity.
-
-Before introducing each part in detail, first give the definition of the general calculation function BM for the optimal match between the two sets that will be used multiple times:
+%The definition of the general calculation function BM for the optimal match between the two sets that will be used multiple times is as follows
+%BM that will be used multiple times for the optimal matching between the two sets is as follows
+Before introducing each aspect in detail, a function $BM$ that will be used frequently in the following to obtain the optimal matching between the two sets is introduced as follows:
+%first give the definition of the general calculation function BM for the optimal match between the two sets that will be used multiple times:
 
 %\begin{equation}
 %\resizebox{.9\hsize}{!}{$BM(\mathcal{X}_1, \mathcal{X}_2, MS) = \frac{\max\Bigl\{\sum\limits_{X_1 \in \mathcal{X}_1, X_2 \in \mathcal{X}_2}MA(X_1, X_2) \times MS(X_1, X_2)\Bigr\}}{\max{(|\mathcal{X}_1|,|\mathcal{X}_2|)}}$}
 %\end{equation}
 
-$$BM(\mathcal{X}_1, \mathcal{X}_2, MS) = \frac{\max\Bigl\{\sum\limits_{X_1 \in \mathcal{X}_1, X_2 \in \mathcal{X}_2}MA(X_1, X_2) \times MS(X_1, X_2)\Bigr\}}{\max{(|\mathcal{X}_1|,|\mathcal{X}_2|)}}$$
+\begin{equation}
+BM(\mathcal{X}_1, \mathcal{X}_2, MS) = \frac{\max\Bigl\{\sum\limits_{X_1 \in \mathcal{X}_1, X_2 \in \mathcal{X}_2}MA(X_1, X_2) \times MS(X_1, X_2)\Bigr\}}{\max{(|\mathcal{X}_1|,|\mathcal{X}_2|)}}
+\end{equation}
+where $\mathcal{X}_{1}$, $\mathcal{X}_{2}$ are any two sets, $MS: \mathcal{X}_{1} \times \mathcal{X}_{2} \mapsto R$ is a function for calculating the similarity of the elements in the two sets, and $MA$ is restricted by the following constraints:
 
+\begin{equation}
+\begin{split}
+\sum_{X_{1} \in \mathcal{X}_{1}} M A\left(X_{1}, X_{2}\right) \leqslant 1 \quad &\forall X_{2} \in \mathcal{X}_{2} \\
+\sum_{X_{2} \in \mathcal{X}_{2}} M A\left(X_{1}, X_{2}\right) \leqslant 1 \quad &\forall X_{1} \in \mathcal{X}_{1} \\
+MA\left(X_{1}, X_{2}\right) \in\{0,1\} \quad &\forall X_{1} \in \mathcal{X}_{1}, X_{2} \in \mathcal{X}_{2}         \\
+\end{split}
+\end{equation}
 
-where $\mathcal{X}_{1}$,$\mathcal{X}_{2}$ are any two sets,$M S: \mathcal{X}_{1} \times \mathcal{X}_{2} \mapsto R$ is a function for calculating the similarity of the elements in the two sets, and MA is subject to the following relationship:
-$$
-\sum_{X_{1} \in \mathcal{X}_{1}} M A\left(X_{1}, X_{2}\right) \leqslant 1 \quad \forall X_{2} \in \mathcal{X}_{2} \eqno{(4.3)}
-$$
-$$
-\sum_{X_{2} \in \mathcal{X}_{2}} M A\left(X_{1}, X_{2}\right) \leqslant 1 \quad \forall X_{1} \in \mathcal{X}_{1} \eqno{(4.4)}
-$$
-$$
-M A\left(X_{1}, X_{2}\right) \in\{0,1\} \quad \forall X_{1} \in \mathcal{X}_{1}, X_{2} \in \mathcal{X}_{2} \eqno{(4.5)}
-$$
-
-The purpose of this method is to find, for each element in the set, the corresponding element in the other set that uniquely matches it, and to optimize the matching result, that is, to maximize the sum of similarities corresponding to each match.
+The purpose of this method is to find, for each element in the set, the corresponding element in the other set that uniquely matches it, and to optimize the matching resultby maximizing the sum of similarities corresponding to each match.
 For example, we can set $\mathcal{X}_1 = \{ \texttt{hello}, \texttt{world} \}$ and $\mathcal{X}_2 = \{ \texttt{hallo}, \texttt{wild} \}$.
-Then it should have $MA(\texttt{hello},\texttt{hallo}) = MA(\texttt{world},\texttt{wild}) = 1$ and $MA(\texttt{hello},\texttt{wild}) = MA(\texttt{world},\texttt{hallo}) = 0$, that is, $\texttt { hello }$ matches $\texttt { hallo}$, $\texttt {world}$ matches $\texttt {wild}$, and finally $BM(\mathcal{X}_1,\mathcal{X}_2,SM) = 0.7$.
-This method is essentially a classic task assignment problem, which can be solved using the Hungarian algorithm \cite{wwy52}.
+Then it should have $MA(\texttt{hello},\texttt{hallo}) = MA(\texttt{world},\texttt{wild}) = 1$ and $MA(\texttt{hello},\texttt{wild}) = MA(\texttt{world},\texttt{hallo}) = 0$, which means $\texttt { hello }$ matches $\texttt { hallo}$, $\texttt {world}$ matches $\texttt {wild}$, and finally $BM(\mathcal{X}_1,\mathcal{X}_2,SM) = 0.7$.
+This method is essentially a classic task assignment problem, which can be solved using the Hungarian algorithm\cite{wwy52}.
+
+
+
 
 \subsubsection{Text Similarity}
-The main goal of text similarity analysis is to measure the similarity of text information appearing in two ontology, and the basis is the measurement of string similarity.
-First define the similarity $S M$ of any two strings of text $L_{1}$, $L_{2}$ as:
+The main goal of text similarity analysis is to measure the similarity of text information appearing in two ontologies, and its basis is the measurement of string similarity.
+%First define the similarity $SM$ of any two strings of text $L_{1}$, $L_{2}$ as:
+The similarity $SM$ of any two strings of text $L_{1}$, $L_{2}$ can be defined as follows:
 $$
 S M\left(L_{1}, L_{2}\right)=1-\frac{\operatorname{ed}\left(L_{1}, L_{2}\right)}{\max \left(\left|L_{1}\right|,\left|L_{2}\right|\right)} \in[0,1] \eqno{(4.6)}
 $$
-The function \text { ed } calculates the shortest edit distance between two strings (ie Levenshtein distance \cite{wwy53}).
-Then define the average similarity SM of the two text sets $\mathcal{L}_{1}$, $\mathcal{L}_{2}$:
+The function \text { ed } calculates the shortest edit distance between two strings, i.e. Levenshtein distance \cite{wwy53}.
+Then the average similarity $SM$ of the two text sets $\mathcal{L}_{1}$, $\mathcal{L}_{2}$can be defined as follows:
 $$
-\overline{S M}\left(\mathcal{L}_{1}, \mathcal{L}_{2}\right)=B M\left(\mathcal{L}_{1}, \mathcal{L}_{2}, S M\right) \eqno{(4.7)}
+\overline{SM}\left(\mathcal{L}_{1}, \mathcal{L}_{2}\right)=B M\left(\mathcal{L}_{1}, \mathcal{L}_{2}, S M\right) \eqno{(4.7)}
 $$
-This is an improved result of the method proposed by Maedche et al. The original method is:
+%This is an improved result of the method proposed by Maedche et al. The original method is:
+This is an improvement on the method proposed by Maedche et al., which is:
 $$
 \overline{S M}^{\prime}\left(\mathcal{L}_{1}, \mathcal{L}_{2}\right)=\frac{1}{\left|\mathcal{L}_{1}\right|} \sum_{L_{i} \in \mathcal{L}_{1}} \max _{L_{j} \in \mathcal{L}_{2}} S M\left(L_{i}, L_{j}\right) \eqno{(4.8)}
 $$
+
+
 There are two obvious problems with the original method.
 First of all, from its definition, this method is asymmetric, that is $\overline{SM}'(\mathcal{L}_1,\mathcal{L}_2) \neq \overline{SM}'(\mathcal{L}_2,\mathcal{L}_1)$, which does not fully meet the requirements of similarity calculation.
 Second, if the texts within a collection are very similar to each other, the calculated similarity may not reflect the overall similarity of the two collections.
@@ -325,23 +350,25 @@ For example, if we set $\mathcal{L}_1 = \{ \texttt{test0}, \texttt{test1}, \dots
 The number of elements in the two sets is very different, but the calculated similarity is very high.
 If we use the improved method, we get $MA(\texttt{test0},\texttt{test0}) = 1$ and $MA(\texttt{test1},\texttt{test0}) = \cdots = MA(\texttt{test9},\texttt{test0}) = 0$, and finally $\overline{SM}(\mathcal{L}_1,\mathcal{L}_2) = 0.1$.
 
-Then it calculates the text similarity between the ontology.
-We divide the text information in an ontology into the following parts according to the belonging type: the text in the Classes definition, the text in the Instances, and the text in the Restrictions. The text similarity is calculated separately for each part. And finally take the average.
-Specifically, suppose $\mathcal{L}_{X}$ represents a text set containing all attribute values such as the name and comment of $X$, which can be any class, instance, or constraint.
-Then, the similarity LM of any two classes, instances, and constraints can be obtained. $\overline{L M}_{C}$, $\overline{L M}_{I}$, $\overline{L M}_{R}$ are defined as following:
+%Then it calculates the text similarity between the ontology.
+%We divide the text information in an ontology into the following parts according to the belonging type:
+The text information in an ontology can be divided into the following parts according to the belonging type:
+the text in the Classes definition, the text in the Instances, and the text in the Restrictions.
+%The text similarity is calculated separately for each part. And finally take the average.
+The text similarity can be calculated separately for each part and the average value can be taken as the text similarity between two ontologies.
+Specifically, suppose $\mathcal{L}_{X}$ represents a text set containing all attribute values such as the name and comment of $X$, which can be any class, instance, or restriction.
+Then, the similarity of any two classes $\overline{L M}_{C}$, the similarity of any two instances $\overline{L M}_{I}$, and the similarity of any two restrictions $\overline{L M}_{R}$ are defined as following:
+\begin{equation}
+\overline{L M}_{C}\left(C_{1}, C_{2}\right)=B M\left(\mathcal{L}_{C_{1}}, \mathcal{L}_{C_{2}}, \overline{S M}\right)
+\end{equation}
+\begin{equation}
+\overline{L M}_{I}\left(I_{1}, I_{2}\right)=B M\left(\mathcal{L}_{I_{1}}, \mathcal{L}_{I_{2}}, \overline{S M}\right)
+\end{equation}
+\begin{equation}
+\overline{L M}_{R}\left(R_{1}, R_{2}\right)=B M\left(\mathcal{L}_{R_{1}}, \mathcal{L}_{R_{2}}, \overline{S M}\right)
+\end{equation}
 
-$$
-\overline{L M}_{C}\left(C_{1}, C_{2}\right)=B M\left(\mathcal{L}_{C_{1}}, \mathcal{L}_{C_{2}}, \overline{S M}\right) \eqno{(4.9)}
-$$
-$$
-\overline{L M}_{I}\left(I_{1}, I_{2}\right)=B M\left(\mathcal{L}_{I_{1}}, \mathcal{L}_{I_{2}}, \overline{S M}\right) \eqno{(4.10)}
-$$
-$$
-\overline{L M}_{R}\left(R_{1}, R_{2}\right)=B M\left(\mathcal{L}_{R_{1}}, \mathcal{L}_{R_{2}}, \overline{S M}\right) \eqno{(4.9)}
-$$
-
-In addition, assuming $\mathcal{C}_{1}, \mathcal{I}_{1}, \mathcal{R}_{1}$ and $\mathcal{C}_{2}, \mathcal{I}_{2}, \mathcal{R}_{2}$ are the set of all classes, instances, and constraints in the ontology ${O}_{1}$, ${O}_{2}$,  respectively, the average text similarity $\overline{LM}(O_1, O_2)$ between $O_1, O_2$ can be calculated:
-
+In addition, assuming $\mathcal{C}_{1}, \mathcal{I}_{1}, \mathcal{R}_{1}$ and $\mathcal{C}_{2}, \mathcal{I}_{2}, \mathcal{R}_{2}$ are the set of all classes, instances, and restrictions in the ontology ${O}_{1}$, ${O}_{2}$, respectively, the average text similarity $\overline{LM}(O_1, O_2)$ between $O_1, O_2$ can be calculated:
 \begin{equation}
 \overline{LM}(O_1, O_2) =
 \frac{
@@ -350,70 +377,84 @@ In addition, assuming $\mathcal{C}_{1}, \mathcal{I}_{1}, \mathcal{R}_{1}$ and $\
 	BM(\mathcal{R}_1, \mathcal{R}_2, \overline{LM}_R)
 }{3}
 \end{equation}
-
-This is also the result of an improvement on the method proposed by Maedche et al. The original method is:
+This is also an improvement on the method proposed by Maedche et al., which is:
 $$
 \overline{L M}^{\prime}\left(O_{1}, O_{2}\right)=\overline{S M}^{\prime}\left(\mathcal{L}_{1}^{\mathrm{C}^{\prime}} \cup \mathcal{L}_{1}^{\mathrm{R}^{\prime}}, \mathcal{L}_{2}^{\mathrm{C}^{\prime}} \cup \mathcal{L}_{2}^{\mathrm{R}^{\prime}}\right) \eqno{(4.13)}
 $$
+where $\mathcal{L}_{i}^{\mathrm{C}^{\prime}}$ and $\mathcal{L}_{i}^{\mathrm{R}^{\prime}}$ are the set of class name and relationship name contained in $O_{i}$, $i \in {1,2}$.
 
-where $\mathcal{L}_{1}^{\mathrm{C}^{\prime}}$ and $\mathcal{L}_{1}^{\mathrm{R}^{\prime}}$ are the class name and relationship name set of $O_{1}$, and the same applies to $O_{2}$.
 This method also has two problems.
 First, it ignores the examples in this book, constraints (such as quantity) other than relationships, and textual information (such as comments) other than names.
 Second, it mixes class names and relationship names for comparison, and there will be a certain deviation: for example, swapping a class name with a relationship name in the ontology will not affect the calculated similarity at all, but a new The ontology of is not exactly the same as the previous ontology.
 In other words, this method cannot distinguish this difference between the ontology.
 
+
+
 \subsubsection{Conceptual Level Similarity}
 
-The main goal of conceptual level similarity analysis is to measure the similarity of the class hierarchies in the two ontology.
-The class hierarchy is mainly described by the class's $\texttt{subClassOf}$ attribute. If the class $C_{1},$ has a $\texttt{subClassOf}$ attribute pointing to $C_{2}$, then in the hierarchy, $C_{1}$ is a subclass of $C_{2}$ and $C_{2}$ is a parent class of $C_{1}$.
+%The main goal of conceptual level similarity analysis is to measure the similarity of the class hierarchies in the two ontologies.
+The class hierarchy is mainly described by the  $\texttt{subClassOf}$ attribute.
+If the class $C_{1}$ has a $\texttt{subClassOf}$ attribute pointing to $C_{2}$, then in the hierarchy, $C_{1}$ is a subclass of $C_{2}$ and $C_{2}$ is a parent class of $C_{1}$.
 From this, a hierarchy decision function $\mathcal{H}\left(C_{1}, C_{2}\right)$ can be defined, which returns true if and only if $C_{1}$ is a subclass of $C_{2}$ in hierarchy $\mathcal{H}$, or $C_{1}=C_{2}$.
-Further, you can also define the calculation function $S C$ of all related classes of a class $C$ in the hierarchy $\mathcal{H}$:
+%Further, you can also define the calculation function $S C$ of all related classes of a class $C$ in the hierarchy $\mathcal{H}$:
+Further, the function $SC$ that calculates all related classes of  a class $C$ in the hierarchy $\mathcal{H}$ can be defined as follows:
 $$
 S C(C, \mathcal{H})=\left\{C_{i} | \mathcal{H}\left(C, C_{i}\right) \vee \mathcal{H}\left(C_{i}, C\right)\right\} \eqno{(4.14)}
 $$
-It can be seen that this function will get a collection containing $C$ itself and all its parent and child classes.
-Combined with the calculation method of text similarity, the similarity $T M\left(C_{1}, C_{2}\right)$ of any class $C_{1}$ in $O_{1}$ and $C_{2}$ in $O_{2}$ on the class hierarchy is:
+It can be seen that this function returns a set containing $C$ itself and all its parent classes and subclasses.
+Combined with the calculation method of text similarity, the similarity of any class $C_{1}$ in $O_{1}$ and $C_{2}$ in $O_{2}$ on the class hierarchies is:
 $$
 T M\left(C_{1}, C_{2}\right)=\overline{S M}\left(\bigcup_{C \in S C\left(C_{1}, \mathcal{H}_{1}\right)} \mathcal{L}_{C}, \quad \bigcup_{C \in S C\left(C_{2}, \mathcal{H}_{2}\right)} \mathcal{L}_{C}\right) \eqno{(4.15)}
 $$
 where $\mathcal{H}_{1}$,$\mathcal{H}_{2}$ are class hierarchies of $O_{1}$ and $O_{2}$, respectively.
-An example from the problem definition is used below to illustrate how $\text{TM}$ is calculated. Suppose the class structure hierarchy of the two ontology $O_{1}$, $O_{2}$ is shown in Figure 2.2, and $C_{1} = \texttt{People}$, $C_{2} = \texttt{Staff}$.
-It can be seen that the parent class of $C_{1}$ is only $C_{1a} = \texttt{CSDepartmentUS}$, and the child class is $C_{1b} = \texttt{Faculty}$, and $C_{1c} = \texttt{Staff}$; the parent class of $C_{2}$ is only $C_{2a} = \texttt{CSDepartmentAustralia}$, and the child class is $C_{2a} = \texttt{AcademicStaff}$ and $C_{2a} = \texttt{TechnicalStaff}$.
-From the definition,we can have $S C\left(C_{1}, \mathcal{H}_{1}\right)=\left\{C_{1}, C_{1a}, C_{1b}, C_{1c} \right\}$, $S C\left(C_{2}, \mathcal{H}_{2}\right)=\left\{C_{2}, C_{2a}, C_{2b}, C_{2c} \right\}$.
+
+
+An example from the problem definition is used below to illustrate how $\text{TM}$ is calculated.
+Suppose the class structure hierarchies of the two ontology $O_{1}$, $O_{2}$ is shown in Figure \ref{fig:onto_matching_ex},
+and $C_{1} = \texttt{People}$, $C_{2} = \texttt{Staff}$.
+It can be seen that the parent class of $C_{1}$ is only $C_{1a} = \texttt{CSDepartmentUS}$,
+and the subclass are $C_{1b} = \texttt{Faculty}$ and $C_{1c} = \texttt{Staff}$;
+the parent class of $C_{2}$ is only $C_{2a} = \texttt{CSDepartmentAustralia}$,
+and the subclass are $C_{2a} \!\!= \!\!\texttt{AcademicStaff}$ and $C_{2a} \!\!=\!\! \texttt{TechnicalStaff}$. From the definition, we can have $SC\left(C_{1}, \mathcal{H}_{1}\right)\!\!=\!\!\left\{C_{1}, C_{1a}, C_{1b}, C_{1c} \right\}$, $S C\left(C_{2}, \mathcal{H}_{2}\right)\!\!=\!\!\left\{C_{2}, C_{2a}, C_{2b}, C_{2c} \right\}$.
 Assuming that the only text information in each class is its own name, then we can have:
 $TM(C_1,C_2) = \overline{SM}(\{\texttt{People},\texttt{CSDepartmentUS},\texttt{Faculty},\texttt{Staff} \}, \{\texttt{Staff},\texttt{CSDepartmentAustralia},\texttt{AcademicStaff},\texttt{TechnicalStaff}\})$
 
-
-
-Finally, the average conceptual level similarity $\overline{T M}$ between ${C}_{1}$ and ${C}_{2}$ can be obtained:
-
+Finally, the average conceptual level similarity $\overline{T M}$ between ${C}_{1}$ and ${C}_{2}$ can be defined as follows:
 $$
 \overline{T M}\left(\mathcal{C}_{1}, \mathcal{C}_{2}\right)=B M\left(\mathcal{C}_{1}, \mathcal{C}_{2}, T M\right) \eqno{(4.16)}
 $$
 
+
+
+
 \subsubsection{Conceptual Relation Similarity}
 
-The main objective of the similarity analysis of conceptual relations is to measure the similarity of the class relations in the two ontology. Here we only focus on the domain $\mathrm{d}(R) \in \mathcal{C}$ and the range $\mathrm{r}(R) \in \mathcal{C}$ in the class relation $\mathrm{R}$.
-To compare the two class relations $R_{1}$, $R_{2}$, simply compare $\mathrm{d}(R_{1})$, $\mathrm{d}(R_{2})$, and $\mathrm{r}(R_{1})$, $\mathrm{r}(R_{2})$, respectively.
+The main objective of the similarity analysis of conceptual relations is to measure the similarity of the class relations in the two ontologies.
+Here we only focus on the domain $\mathrm{d}(R) \in \mathcal{C}$ and the range $\mathrm{r}(R) \in \mathcal{C}$ in the class relation $\mathrm{R}$.
+To compare the two class relations $R_{1}$, $R_{2}$, it is enough to compare $\mathrm{d}(R_{1}), \mathrm{d}(R_{2})$, and $\mathrm{r}(R_{1}), \mathrm{r}(R_{2})$, respectively.
 
-When comparing domains or ranges here, it need to calculate class $C$, which is all parent classes $UC$ in hierarchy $\mathrm{H}$:
+When comparing domains or ranges, it is necessary to get all the parent classes $UC$ of class $C$ in the hierarchy $\mathrm{H}$:
 $$
 U C(C, \mathcal{H})=\left\{C_{i} | \mathcal{H}\left(C, C_{i}\right)\right\} \eqno{(4.17)}
 $$
 
-Combined with the calculation method of text similarity, the semantic similarity SeM (C1, C2) of any class C1 in O1 and C2 in O2 can be obtained as:
+Combined with the calculation method of text similarity, the semantic similarity $SeM (C_1, C_2)$ of any class $C_1$ in $O_1$ and $C_2$ in $O_2$ can be obtained as:
 $$
 SeM\left(C_{1}, C_{2}\right)=\overline{S M}\left(\bigcup_{C \in U C\left(C_{1}, \mathcal{H}_{1}\right)} \mathcal{L}_{C}, \quad \bigcup_{C \in U C\left(C_{2}, \mathcal{H}_{2}\right)} \mathcal{L}_{C}\right) \eqno{(4.18)}
 $$
 
-The reason why the text in the parent class is used to calculate the semantic similarity of the child class is that it has the property of inheritance. For example, the $\texttt{Human}$ class has a $\texttt{Man}$ subclass, so the property $\texttt{HasEyes}$ of the $\texttt{Human}$ class inherits from $\texttt{Man}$, which means that $\texttt{Man}$ should also have the property $\texttt{HasEyes}$. In this way, the semantic information of the subclass will be more complete.
+The reason why the text in the parent class is used to calculate the semantic similarity of the subclass is that the semantic information can be passed to the child class through the inheritance property.
+For example, the $\texttt{Human}$ class has a $\texttt{Man}$ subclass, so the property $\texttt{HasEyes}$ of the $\texttt{Human}$ class is inherited by $\texttt{Man}$, which means that $\texttt{Man}$ should also have the property $\texttt{HasEyes}$.
+In this way, the semantic information of the subclass will be more complete.
 
-Use the following method to calculate the similarity $R M$ of the two class relationships $R_{1}$, $R_{2}$:
+%Use the following method to calculate the similarity $R M$ of the two class relationships $R_{1}$, $R_{2}$:
+The similarity $R M$ of the two class relationships $R_{1}$, $R_{2}$ can be calculated as follow:
 $$
 R M\left(R_{1}, R_{2}\right)=\sqrt{\operatorname{SeM}\left(\mathrm{d}\left(R_{1}\right), \mathrm{d}\left(R_{2}\right)\right) \times \operatorname{SeM}\left(\mathrm{r}\left(R_{1}\right), \mathrm{r}\left(R_{2}\right)\right)} \eqno{(4.19)}
 $$
-
-The geometric mean of the similarity between the domain and the range is used here to eliminate bias. That is, if one of the two is low, even if the other is high, the final result will not become high as a result. This is because the same class may be referenced by multiple relationships, which can distinguish these relationships.
+The geometric mean of the similarity between the domain and the range is used here to eliminate bias.
+In other words, if one of the two is low, the final result will not become higher even if the other is higher.
+This is because the same class may be referenced by multiple relationships, which can distinguish these relationships.
 
 Finally, the average similarity $\overline{R M}$ between $O_{1}$ and $O_{2}$ can be obtained:
 $$
@@ -422,12 +463,18 @@ $$
 
 That is, the arithmetic average of the text similarity, concept level similarity, and concept relationship similarity.
 
+
+
+
+
 \subsubsection{Similarity Combination}
-Finally, the comprehensive similarity $S\left(O_{1}, O_{2}\right)$ between the ontology $O_{1}$, $O_{2}$ can be calculated:
+After calculating the three similarities, , the comprehensive similarity $S\left(O_{1}, O_{2}\right)$ between the ontology $O_{1}$, $O_{2}$ can be calculated as follows:
 $$
 S\left(O_{1}, O_{2}\right)=\frac{\overline{S M}+\overline{T M}+\overline{R M}}{3} \eqno{(4.21)}
 $$
 
+
+% from this TODO 20200108
 \subsection{similarity analysis-based Approach for Ontology matching tuning}
 
 After introducing the construction method of the history database and the similarity analysis method of the ontology, the next step is to combine the two to form an ontology matching tuning method based on the similarity analysis.
@@ -591,6 +638,47 @@ $$ r' = r+\frac{1}{r} = \frac{n_1}{n_2} + \frac{n_2}{n_1} $$
 In this way, even if the values of $O_1,O_2$, $r'$ are swapped, symmetry is achieved.
 
 
+\begin{table}[htb!]
+\centering
+\caption{Features of Ontology Matching Tasks}
+\label{table:onto_descriptors}
+\begin{tabular}{@{}c|c|l@{}}
+\toprule
+~~~~ category ~~~~ &
+~~~~ name ~~~~ &
+description
+\\ \midrule
+				  	& \texttt {nConcepts} 	& number of concepts \\
+				  	& \texttt {pConcept} 	& the proportion of entities in the concept \\
+				  	& \texttt {nDataProps} 	& number of data attributes \\
+Single Ontology   	& \texttt {pDataProp} 	& Data Properties Percentage of Entities \\
+Scale feature     	& \texttt {nObjProps} 	& number of object attributes \\
+				  	& \texttt {pObjProp} 	& Proportion of entities with object properties \\
+				  	& \texttt {nInstances} 	& number of instances \\
+				  	& \texttt {pInstance} 	& instance proportion of entity \\ \midrule
+				  	& \texttt {nSubClassOf} & \texttt {subClassOf} occurrences \\
+Single Ontology 	  	& \texttt {nSubPropOf}  & \texttt {subPropOf} occurrences \\
+Semantic features 	& \texttt {nDomain} 	& \texttt {domain} occurrences \\
+				  	& \texttt {nRange} 		& \texttt {range} occurrences \\
+				  	& \texttt {nSameAs} 	& \texttt {sameAs} occurrences \\ \midrule
+				  	& \texttt {nEntCmnts} 	& number of annotated entities \\
+				  	& \texttt {avgRuWCmts} 	& average meaningless words in comments \\
+Single ontology     & \texttt {pUclsNames} 	& meaningless concept name ratio \\
+Word sense features & \texttt {pUdpNames} 	& meaningless data attribute name ratio \\
+					& \texttt {pUopNames} 	& meaningless object attribute name scale \\
+					& \texttt {pUallNames} 	& ratio of meaningless entity names \\ \midrule
+Single ontology     & \texttt {avgCptDepth} & concept tree average depth \\
+Structural Features & \texttt {avgCptGrDgr} & Concept Map Node Average Degree \\ \midrule
+					& \texttt {rNConcepts} 	& ratio of concept numbers \\
+					& \texttt {rNDataProps} & ratio of the number of data attributes \\
+Double ontology     & \texttt {rNObjProps} 	& ratio of object attributes \\
+Combined feature 	& \texttt {rNInstances} & ratio of number of instances \\
+					& \texttt {LM} 			& text similarity \\
+					& \texttt {TM} 			& Conceptual Structure Similarity \\
+					& \texttt {RM} 			& Similarity relation \\ \bottomrule
+\end{tabular}
+\end{table}
+
 \subsection{Extra-Trees-Based Approach for Ontology Matching Tuning}
 
 First define a single ontology feature index extraction function $\vec{Des}(O)$ and a dual ontology combined feature index extraction function $\vec{Des_d}(T)$.It can extract the definitions in the table \ref{table:onto_descriptors} in the ontology $O$ and the matching task $T$ respectively.Combine the single ontology feature index with the dual ontology feature index and return them in order.
@@ -725,15 +813,32 @@ The names of the ontology matching systems participating in the test, the number
 % \begin{tabular}{@{}ccccc@{}}
 % \toprule
 % System		& parameter	& benchmark	& conference	& anatomy	\\ \midrule
-% Falcon-AO	& 26		& √			& √				& √			\\
-% GMap		& 3			& √			& √				&  			\\
-% Lily		& 13, 18	& √			& √				& √			\\
-% LogMap		& 10		& √			& √				& √			\\
-% OLA			& 26		& √			& √				&  			\\
-% RiMOM		& 5			& √			& √				&  			\\
-% XMap		& 5			& √			& √				&  			\\ \bottomrule
+% Falcon-AO	& 26		& $\surd$			& $\surd$				& $\surd$			\\
+% GMap		& 3			& $\surd$			& $\surd$				&  			\\
+% Lily		& 13, 18	& $\surd$			& $\surd$				& $\surd$			\\
+% LogMap		& 10		& $\surd$			& $\surd$				& $\surd$			\\
+% OLA			& 26		& $\surd$			& $\surd$				&  			\\
+% RiMOM		& 5			& $\surd$			& $\surd$				&  			\\
+% XMap		& 5			& $\surd$			& $\surd$				&  			\\ \bottomrule
 % \end{tabular}
 % \end{table}
+
+\begin{table}[ht]
+\centering
+\caption{ontology matching system}
+\label{table:om_sys}
+\begin{tabular}{@{}ccccc@{}}
+\toprule
+System		& parameter	& benchmark	& conference	& anatomy	                \\ \midrule
+Falcon-AO	& 26		& $\surd$			& $\surd$				& $\surd$	\\
+GMap		& 3			& $\surd$			& $\surd$				&  			\\
+Lily		& 13, 18	& $\surd$			& $\surd$				& $\surd$	\\
+LogMap		& 10		& $\surd$			& $\surd$				& $\surd$	\\
+OLA			& 26		& $\surd$			& $\surd$				&  			\\
+RiMOM		& 5			& $\surd$			& $\surd$				&  			\\
+XMap		& 5			& $\surd$			& $\surd$				&  			\\ \bottomrule
+\end{tabular}
+\end{table}
 
 It should be noted that Lily uses two sets of matching algorithms that are not identical to handle large and small ontology. These two sets of algorithms share some parameters and have their own separate parameters.
 In actual testing, we tuned these two sets of algorithms as two systems, one running the benchmark and conference datasets, and the other only running the anatomy dataset, and finally combined the results.
@@ -1098,7 +1203,7 @@ This illustrates the difficult nature of each system to tune on the conference d
 \caption{Precision}
 \label{fig:anatomy_anatomy_Precision}
 \end{subfigure}
-\begin{subfigure}{0.49\textwidth}}
+\begin{subfigure}{0.49\textwidth}
 	\centering
 \includegraphics[width=\textwidth]{data_figs/anatomy_anatomy_Recall.pdf}
 \caption{Recall}

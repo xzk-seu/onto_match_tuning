@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.2)  6 JAN 2020 18:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.2)  9 JAN 2020 17:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -533,88 +533,88 @@ LaTeX Warning: Label `last-page' multiply defined.
 )
 \openout1 = `ontology_matching_tuning.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 60.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 60.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 61.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 61.
  (/usr/local/texlive/2019/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C00/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C05/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C09/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C10/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C20/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C19/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C40/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C42/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C43/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C50/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C52/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C49/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C60/mj/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C61/mj/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C63/mj/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C64/mj/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C65/mj/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C70/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C31/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C32/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C33/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C34/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C35/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C36/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C37/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C80/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C81/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C01/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C11/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C21/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C41/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for C62/song/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C00/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C05/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C09/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C10/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C20/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C19/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C40/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C42/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C43/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C50/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C52/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C49/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C60/mj/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C61/mj/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C63/mj/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C64/mj/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C65/mj/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C70/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C31/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C32/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C33/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C34/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C35/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C36/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C37/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C80/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C81/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C01/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C11/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C21/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C41/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for C62/song/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfigure package is loaded.
 Package caption Info: threeparttable package is loaded.
@@ -693,24 +693,24 @@ File: extended.enc 2015/04/18 4.8.4
 (/usr/local/texlive/2019/texmf-dist/tex/latex/cjk/texinput/extended.chr
 File: extended.chr 2015/04/18 4.8.4
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 69.
+LaTeX Font Info:    Try loading font information for U+msa on input line 70.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 69.
+LaTeX Font Info:    Try loading font information for U+msb on input line 70.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 69.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 70.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
 
 Package multicol Warning: I moved some lines to the next page.
-(multicol)                Footnotes on page 1 might be wrong on input line 111.
+(multicol)                Footnotes on page 1 might be wrong on input line 112.
 
 
 [1
@@ -718,140 +718,140 @@ Package multicol Warning: I moved some lines to the next page.
 {/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 [2]
 
-LaTeX Warning: Citation `wwy32' on page 3 undefined on input line 141.
+LaTeX Warning: Citation `wwy32' on page 3 undefined on input line 142.
 
 
-LaTeX Warning: Citation `wwy42' on page 3 undefined on input line 159.
+LaTeX Warning: Citation `wwy42' on page 3 undefined on input line 160.
 
 [3] [4] [5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 248--249
+Underfull \hbox (badness 10000) in paragraph at lines 249--250
 []\OT1/cmr/bx/n/10 Definition 4 \tenrm (Match-ing Strat-egy Tun-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 248--249
+Underfull \hbox (badness 10000) in paragraph at lines 249--250
 \tenrm ing). \OT1/cmr/m/it/10 Given an on-tol-ogy match-ing sys-tem
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 260--261
+Underfull \hbox (badness 10000) in paragraph at lines 261--262
 []\OT1/cmr/bx/n/10 Definition 6 \tenrm (Match-ing Strat-egy Tun-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 260--261
+Underfull \hbox (badness 10000) in paragraph at lines 261--262
 \tenrm ing). \OT1/cmr/m/it/10 Given an on-tol-ogy match-ing sys-tem
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 271--271
+Underfull \hbox (badness 10000) in paragraph at lines 272--272
 []\OT1/cmr/bx/n/10 Construction Ap-proach of His-tor-i-cal
  []
 
 [8]
-Overfull \hbox (30.43008pt too wide) detected at line 365
+Overfull \hbox (30.43008pt too wide) detected at line 366
 []
  []
 
 [9]
-Overfull \hbox (15.50241pt too wide) detected at line 391
+Overfull \hbox (15.50241pt too wide) detected at line 392
 \OML/cmm/m/it/10 TM [] \tenrm = [] []
  []
 
 
-Overfull \hbox (66.4666pt too wide) detected at line 404
+Overfull \hbox (66.4666pt too wide) detected at line 405
 []
  []
 
 
-Overfull \hbox (21.44458pt too wide) detected at line 425
+Overfull \hbox (21.44458pt too wide) detected at line 426
 \OML/cmm/m/it/10 SeM [] \tenrm = [] []
  []
 
 [10]
-Overfull \hbox (27.54356pt too wide) detected at line 432
+Overfull \hbox (27.54356pt too wide) detected at line 433
 \OML/cmm/m/it/10 RM [] \tenrm = []
  []
 
 
-Overfull \hbox (94.87479pt too wide) detected at line 457
+Overfull \hbox (94.87479pt too wide) detected at line 458
 [] [] \tenrm = [] []
  []
 
 [11]
-Overfull \hbox (99.427pt too wide) in paragraph at lines 479--481
+Overfull \hbox (99.427pt too wide) in paragraph at lines 480--482
 []$
  []
 
 
-Overfull \hbox (144.40909pt too wide) detected at line 487
+Overfull \hbox (144.40909pt too wide) detected at line 488
 [] \OML/cmm/m/it/10 MA [] \OMS/cmsy/m/n/10 ^^B \OML/cmm/m/it/10 MS [] \U/msa/m/
 n/10 6 [] \OML/cmm/m/it/10 MA [] \U/msa/m/n/10 6 [] []
  []
 
 
-Overfull \hbox (98.57858pt too wide) detected at line 506
+Overfull \hbox (98.57858pt too wide) detected at line 507
 \tenrm 0 \U/msa/m/n/10 6 [] 6 [] [] \tenrm = 2[]
  []
 
 [12] [13]
 
-LaTeX Warning: Citation `tyz74' on page 14 undefined on input line 554.
+LaTeX Warning: Citation `tyz74' on page 14 undefined on input line 555.
 
 
-Overfull \hbox (48.8672pt too wide) detected at line 578
+Overfull \hbox (48.8672pt too wide) detected at line 579
 [] \tenrm = []
  []
 
 [14]
 
 LaTeX Warning: Reference `table:onto_descriptors' on page 15 undefined on input
- line 587.
+ line 588.
 
 
-LaTeX Warning: Reference `eq:def_kbase' on page 15 undefined on input line 589.
+LaTeX Warning: Reference `eq:def_kbase' on page 15 undefined on input line 590.
 
 
 
-Overfull \hbox (76.56924pt too wide) detected at line 596
+Overfull \hbox (76.56924pt too wide) detected at line 597
 []
  []
 
 
-LaTeX Warning: Citation `tyz74' on page 15 undefined on input line 617.
+LaTeX Warning: Citation `tyz74' on page 15 undefined on input line 618.
 
 [15]
 
-LaTeX Warning: Citation `tyz74' on page 16 undefined on input line 619.
+LaTeX Warning: Citation `tyz74' on page 16 undefined on input line 620.
 
 
-Overfull \hbox (105.76198pt too wide) detected at line 627
+Overfull \hbox (105.76198pt too wide) detected at line 628
 [][] \tenrm = [] [] [] + \OML/cmm/m/it/10 ^^U[] [] a[]; i \OMS/cmsy/m/n/10 2 f\
 tenrm 1\OML/cmm/m/it/10 ; [] ; d\OMS/cmsy/m/n/10 g
  []
 
 
-LaTeX Warning: Citation `tyz75' on page 16 undefined on input line 638.
+LaTeX Warning: Citation `tyz75' on page 16 undefined on input line 639.
 
 
-Underfull \hbox (badness 7064) in paragraph at lines 643--643
+Underfull \hbox (badness 7064) in paragraph at lines 644--644
 []\OT1/cmr/bx/n/10 Learning-based Ap-proach for Match-ing
  []
 
 [16] [17]
-Underfull \hbox (badness 10000) in paragraph at lines 687--688
+Underfull \hbox (badness 10000) in paragraph at lines 688--689
 
  []
 
 
-LaTeX Warning: Citation `wwy58' on page 18 undefined on input line 695.
+LaTeX Warning: Citation `wwy58' on page 18 undefined on input line 696.
 
 [18]
 
-LaTeX Warning: Citation `(' on page 19 undefined on input line 732.
+LaTeX Warning: Citation `(' on page 19 undefined on input line 733.
 
 [19] [20] [21] [22] [23] [24] [25] [26] [27]
-Underfull \hbox (badness 10000) in paragraph at lines 947--950
+Underfull \hbox (badness 10000) in paragraph at lines 948--951
 \tenrm Har-mony+NaiveAscending, Max+Hungarian, Sig-
  []
 
